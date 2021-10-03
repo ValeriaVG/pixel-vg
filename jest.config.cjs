@@ -9,8 +9,15 @@ module.exports = {
 				preprocess: true
 			}
 		],
-		'^.+\\.ts$': 'ts-jest'
+		'^.+\\.(t|j)s$': 'ts-jest'
 	},
-	moduleFileExtensions: ['js', 'ts', 'svelte'],
-	setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect']
+	moduleFileExtensions: ['js', 'ts', 'svelte', 'json'],
+	setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+	moduleNameMapper: {
+		'^\\$app(.*)$': [
+			'<rootDir>/.svelte-kit/dev/runtime/app$1',
+			'<rootDir>/.svelte-kit/build/runtime/app$1'
+		]
+	},
+	transformIgnorePatterns: ['<rootDir>/node_modules/']
 };
