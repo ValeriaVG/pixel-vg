@@ -3,18 +3,33 @@ import path from 'path';
 describe('Drawing', () => {
 	it('can draw a figure', () => {
 		cy.visit('/');
-		cy.get('canvas').should('have.attr', 'data-ready', 'true');
-		for (let i = 0; i < 16; i++) {
-			cy.get('canvas').click(16 * i + 1, 16 * i + 1);
-		}
-		cy.get('canvas').matchImageSnapshot('line-drawing');
+		cy.get('canvas')
+			.should('have.attr', 'data-ready', 'true')
+			.then(($canvas) => {
+				const width = $canvas[0].clientWidth;
+				const size = width / 16;
+				for (let i = 0; i < 16; i++) {
+					// Click in the center of canvas
+					cy.get('canvas').click(size * i + size / 2, size * i + size / 2);
+				}
+				cy.get('canvas').matchImageSnapshot('line-drawing');
+			});
 	});
 	it('can save figure as png', () => {
 		cy.visit('/');
-		cy.get('canvas').should('have.attr', 'data-ready', 'true');
-		for (let i = 0; i < 16; i++) {
-			cy.get('canvas').click(16 * i + 1, 16 * i + 1);
-		}
+		cy.get('canvas')
+			.should('have.attr', 'data-ready', 'true')
+			.then(($canvas) => {
+				const width = $canvas[0].clientWidth;
+				const size = width / 16;
+				for (let i = 0; i < 16; i++) {
+					// Click in the center of canvas
+					cy.get('canvas').click(size * i + size / 2, size * i + size / 2);
+				}
+				cy.get('canvas').matchImageSnapshot('line-drawing', {
+					snapshotSizes: [[512, 512]]
+				});
+			});
 		cy.window().then(function (p) {
 			//stubbing prompt window
 			cy.stub(p, 'prompt').returns('new-image');
