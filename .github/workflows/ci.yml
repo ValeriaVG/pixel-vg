@@ -1,16 +1,16 @@
 name: ci
 on: [push, pull_request]
 jobs:
-  # e2e:
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - name: Checkout 🛎
-  #       uses: actions/checkout@v2
+  e2e:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
 
-  #     - name: Install and run Cypress tests 🌲
-  #       uses: cypress-io/github-action@v2
-  #       with:
-  #         start: npm start
+      - name: Install and run Cypress tests 🌲
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm start
 
   unit:
     runs-on: ubuntu-20.04

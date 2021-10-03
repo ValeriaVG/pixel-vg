@@ -186,15 +186,15 @@
 
 	const onMouseMove = (e: MouseEvent) => {
 		if (
-			e.clientX < canvasRect.left ||
-			e.clientX > canvasRect.right ||
-			e.clientY < canvasRect.top ||
-			e.clientY > canvasRect.bottom
+			e.offsetX < 0 ||
+			e.offsetX > canvas.clientWidth ||
+			e.offsetY < 0 ||
+			e.offsetY > canvas.clientHeight
 		)
 			return;
 
-		const x = Math.floor(((e.clientX - canvasRect.left) / blockSize) * PIXEL_RATIO);
-		const y = Math.floor(((e.clientY - canvasRect.top) / blockSize) * PIXEL_RATIO);
+		const x = Math.floor((e.offsetX / blockSize) * PIXEL_RATIO);
+		const y = Math.floor((e.offsetY / blockSize) * PIXEL_RATIO);
 		selected = [x, y];
 		render();
 	};
@@ -212,8 +212,8 @@
 	};
 
 	const onClick = (e) => {
-		const x = Math.floor(((e.clientX - canvasRect.left) / blockSize) * PIXEL_RATIO);
-		const y = Math.floor(((e.clientY - canvasRect.top) / blockSize) * PIXEL_RATIO);
+		const x = Math.floor((e.offsetX / blockSize) * PIXEL_RATIO);
+		const y = Math.floor((e.offsetY / blockSize) * PIXEL_RATIO);
 		selected = [x, y];
 		recordPoint(x, y);
 		// Mirror X

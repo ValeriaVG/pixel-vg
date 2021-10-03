@@ -1,4 +1,6 @@
 {
 	"baseUrl": "http://localhost:3000",
-	"ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"]
+	"ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
+	"viewportWidth": 1280,
+	"viewportHeight": 800
 }
