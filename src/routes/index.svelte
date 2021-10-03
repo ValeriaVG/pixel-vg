@@ -26,6 +26,7 @@
 </nav>
 
 <p>HINT: Click right mouse button on the canvas and choose "Save image" to save your artwork.</p>
+<p><a href="/gallery">Image examples</a></p>
 
 <style>
 	button {

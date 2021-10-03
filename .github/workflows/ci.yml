@@ -27,5 +27,8 @@ jobs:
           # as we do not plan to run tests
           CYPRESS_INSTALL_BINARY: 0
 
+      - name: Build app 🧪
+        run: npm run build
+
       - name: Run Unit tests 🧪
         run: npm run test:ci
