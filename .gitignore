@@ -3,3 +3,6 @@ node_modules
 /build
 /.svelte-kit
 /package
+screenshots
+videos
+__diff_output__

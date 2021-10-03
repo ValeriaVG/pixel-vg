@@ -13,9 +13,15 @@
 			style={`background:${hex}`}
 			class={hex === selectedColor ? 'selected' : ''}
 			on:click={selectColor(hex)}
-			>{hex ? '' : 'X'}
-		</button>
+			title={hex}
+		/>
 	{/each}
+	<button
+		class={selectedColor === null ? 'selected' : ''}
+		on:click={selectColor(null)}
+		title={'Eraser'}
+		>X
+	</button>
 </nav>
 
 <style>

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Canvas from '$lib/canvas.svelte';
+	import DrawingBoard from '$lib/drawing-board.svelte';
 	import Palette from '$lib/palette.svelte';
 
 	let mirror: number = 0;
-	let colors = ['#000000', '#ff0000', null];
+	let colors = ['#000000', '#ff0000'];
 	export let selectedColor = colors[0];
 
 	const toggleMirror = (mode: number) => () => {
@@ -18,7 +18,7 @@
 <h1>Pixel Editor</h1>
 <Palette {colors} bind:selectedColor />
 <br />
-<Canvas bind:color={selectedColor} {mirror} />
+<DrawingBoard bind:color={selectedColor} {mirror} />
 
 <nav>
 	<button on:click={toggleMirror(1)} class={mirror & 1 ? 'active' : ''}>x|x</button>

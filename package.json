@@ -5,28 +5,44 @@
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
+		"start": "npm run build && npm run preview",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+		"test": "jest src",
+		"test:ci": "npm run test -- --ci",
+		"test:watch": "npm run test -- --watch",
+		"cy:open": "cypress open",
+		"cy:run": "cypress run",
+		"e2e": "start-server-and-test dev http://localhost:3000 cy:open",
+		"e2e:ci": "start-server-and-test dev http://localhost:3000 cy:run"
 	},
 	"devDependencies": {
+		"@sveltejs/adapter-static": "^1.0.0-next.20",
 		"@sveltejs/kit": "next",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/svelte": "^3.0.3",
+		"@types/jest": "^27.0.2",
 		"@typescript-eslint/eslint-plugin": "^4.31.1",
 		"@typescript-eslint/parser": "^4.31.1",
+		"canvas": "^2.8.0",
+		"cypress": "^8.5.0",
+		"cypress-img-snapshot": "^1.0.0",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^3.2.1",
+		"jest": "^27.2.4",
 		"prettier": "^2.4.1",
 		"prettier-plugin-svelte": "^2.4.0",
+		"start-server-and-test": "^1.14.0",
 		"svelte": "^3.42.6",
 		"svelte-check": "^2.2.6",
+		"svelte-jester": "^2.1.5",
 		"svelte-preprocess": "^4.9.4",
+		"ts-jest": "^27.0.5",
 		"tslib": "^2.3.1",
 		"typescript": "^4.4.3"
 	},
-	"type": "module",
-	"dependencies": {
-		"@sveltejs/adapter-static": "^1.0.0-next.20"
-	}
+	"type": "module"
 }

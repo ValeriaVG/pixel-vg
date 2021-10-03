@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { compileProgram } from './webgl';
 
-	const PIXEL_RATIO = 1.5;
+	const PIXEL_RATIO = window.devicePixelRatio;
 	let canvas: HTMLCanvasElement;
 	let gl: WebGLRenderingContext;
 	export let blockSize = 32;
@@ -11,6 +11,8 @@
 	export let pixels: Array<[number, number, string]> = [];
 	export let color: string = '#00ff00';
 	export let mirror: number = 0;
+
+	let isReady: boolean = false;
 
 	const ERASER_COLOR = '#cacaca';
 
@@ -122,10 +124,14 @@
 			gl.enableVertexAttribArray(position);
 			gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 		}
+
+		isReady = true;
 	};
 
 	onMount(() => {
 		gl = canvas.getContext('webgl');
+		if (!gl) return;
+
 		gridShaders = compileProgram(
 			gl,
 			{
@@ -204,8 +210,10 @@
 		}
 	};
 
-	const onClick = () => {
-		const [x, y] = selected;
+	const onClick = (e) => {
+		const x = Math.floor(((e.clientX - canvasRect.left) / blockSize) * PIXEL_RATIO);
+		const y = Math.floor(((e.clientY - canvasRect.top) / blockSize) * PIXEL_RATIO);
+		selected = [x, y];
 		recordPoint(x, y);
 		// Mirror X
 		if (mirror & 1) {
@@ -236,4 +244,6 @@
 	on:mousemove={onMouseMove}
 	on:mouseleave={onMouseLeave}
 	on:click={onClick}
+	data-ready={isReady}
+	data-testid="drawing-board"
 />

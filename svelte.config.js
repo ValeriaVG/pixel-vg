@@ -9,7 +9,8 @@ const config = {
 
 	kit: {
 		target: 'body',
-		adapter: adapter()
+		adapter: adapter(),
+		ssr: false
 	}
 };
 
