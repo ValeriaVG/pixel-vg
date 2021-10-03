@@ -1,40 +1,27 @@
 <script lang="ts">
+	import Controls from '$lib/controls.svelte';
 	import DrawingBoard from '$lib/drawing-board.svelte';
+	import { downloadURI } from '$lib/files';
 	import Palette from '$lib/palette.svelte';
 
-	let mirror: number = 0;
+	let mirror = 0;
 	let colors = ['#000000', '#ff0000'];
-	export let selectedColor = colors[0];
+	let selectedColor = colors[0];
+	let getImageData = () => '';
 
-	const toggleMirror = (mode: number) => () => {
-		if (mirror & mode) {
-			mirror ^= mode;
-		} else {
-			mirror |= mode;
-		}
+	const saveImage = () => {
+		const data = getImageData();
+		let filename = prompt('How should we call the file?', 'image');
+		if (!filename.endsWith('.png')) filename += '.png';
+		downloadURI(data, filename);
 	};
 </script>
 
 <h1>Pixel Editor</h1>
 <Palette {colors} bind:selectedColor />
 <br />
-<DrawingBoard bind:color={selectedColor} {mirror} />
-
-<nav>
-	<button on:click={toggleMirror(1)} class={mirror & 1 ? 'active' : ''}>x|x</button>
-	<button on:click={toggleMirror(2)} class={mirror & 2 ? 'active' : ''}>y|y</button>
-</nav>
+<DrawingBoard bind:color={selectedColor} {mirror} bind:getImageData />
+<Controls bind:mirror {saveImage} />
 
 <p>HINT: Click right mouse button on the canvas and choose "Save image" to save your artwork.</p>
 <p><a href="/gallery">Image examples</a></p>
-
-<style>
-	button {
-		background-color: white;
-		color: black;
-	}
-	.active {
-		background-color: black;
-		color: white;
-	}
-</style>

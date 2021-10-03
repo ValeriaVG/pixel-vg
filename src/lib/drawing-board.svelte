@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { MirrorMode } from './types';
 	import { compileProgram } from './webgl';
 
 	const PIXEL_RATIO = window.devicePixelRatio;
@@ -44,13 +45,13 @@
 		if (selected) {
 			const [x, y] = selected;
 			selectedPoints.push([x, y, currentColor]);
-			if (mirror & 1) {
+			if (mirror & MirrorMode.X) {
 				selectedPoints.push([size - x - 1, y, currentColor]);
 			}
-			if (mirror & 2) {
+			if (mirror & MirrorMode.Y) {
 				selectedPoints.push([x, size - y - 1, currentColor]);
 			}
-			if (mirror & 1 && mirror & 2) {
+			if (mirror & MirrorMode.X && mirror & MirrorMode.Y) {
 				selectedPoints.push([size - x - 1, size - y - 1, currentColor]);
 			}
 			points += selectedPoints.length;
@@ -129,7 +130,7 @@
 	};
 
 	onMount(() => {
-		gl = canvas.getContext('webgl');
+		gl = canvas.getContext('webgl', { preserveDrawingBuffer: true });
 		if (!gl) return;
 
 		gridShaders = compileProgram(
@@ -216,22 +217,25 @@
 		selected = [x, y];
 		recordPoint(x, y);
 		// Mirror X
-		if (mirror & 1) {
+		if (mirror & MirrorMode.X) {
 			recordPoint(size - x - 1, y);
 		}
 		// Mirror Y
-		if (mirror & 2) {
+		if (mirror & MirrorMode.Y) {
 			recordPoint(x, size - y - 1);
 		}
 
 		// Mirror XY
-		if (mirror & 1 && mirror & 2) {
+		if (mirror & MirrorMode.X && mirror & MirrorMode.Y) {
 			recordPoint(size - x - 1, size - y - 1);
 		}
 		render();
 	};
 
 	$: canvasRect = canvas?.getBoundingClientRect();
+	export const getImageData = () => {
+		return canvas.toDataURL();
+	};
 </script>
 
 <canvas
