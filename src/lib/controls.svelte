@@ -13,22 +13,24 @@
 </script>
 
 <nav>
-	<button on:click={toggleMirror(MirrorMode.X)} class={mirror & MirrorMode.X ? 'active' : ''}
-		>x|x</button
+	<button
+		on:click={toggleMirror(MirrorMode.X)}
+		class={mirror & MirrorMode.X ? 'active button-pink' : 'button-pink'}>x|x</button
 	>
-	<button on:click={toggleMirror(MirrorMode.Y)} class={mirror & MirrorMode.Y ? 'active' : ''}
-		>y|y</button
+	<button
+		on:click={toggleMirror(MirrorMode.Y)}
+		class={mirror & MirrorMode.Y ? 'active button-pink' : 'button-pink'}>y|y</button
 	>
-	<button on:click={saveImage}>Save image</button>
+	<button on:click={saveImage} class="button-pink">Save image</button>
 </nav>
 
 <style>
-	button {
-		background-color: white;
-		color: black;
+	.button-pink {
+		background-color: #cf3a69;
+		border: none;
 	}
 	.active {
-		background-color: black;
-		color: white;
+		background-color: #606c76;
+		border: none;
 	}
 </style>

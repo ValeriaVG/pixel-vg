@@ -32,7 +32,7 @@
 
 <nav>
 	<button
-		class={selectedColor === null ? 'selected' : ''}
+		class={selectedColor === null ? 'selected button-lightgrey' : 'button-lightgrey'}
 		on:click={selectColor(null)}
 		title={'Eraser'}
 		>X
@@ -47,7 +47,7 @@
 			<span title="Delete" class="close" on:click={removeColor(hex)}>&times;</span>
 		</button>
 	{/each}
-	<button on:click={onAddColor} title={'Add color'}>+ </button>
+	<button on:click={onAddColor} title={'Add color'} class="button-lightgrey">+</button>
 </nav>
 
 <style>
@@ -57,16 +57,21 @@
 		flex-wrap: wrap;
 	}
 	button {
-		width: 2rem;
-		height: 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 3em;
+		height: 3em;
 		border: 2px solid rgba(255, 255, 255, 1);
 		transition: border-color ease 100ms;
-		padding: 0;
+		padding: 0.5rem;
 		margin: 2px;
-		line-height: 1rem;
-		text-align: center;
-		display: block;
-		position: relative;
+	}
+	.button-lightgrey {
+		color: #000;
+		background-color: #e7e7e7;
+		display: flex;
+		justify-content: center;
 	}
 	button:hover {
 		border-color: rgba(255, 255, 255, 0.75);

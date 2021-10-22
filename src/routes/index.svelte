@@ -40,7 +40,5 @@
 
 <h1>Pixel Editor</h1>
 <Palette {colors} bind:selectedColor on:addcolor={addColor} on:remcolor={removeColor} />
-<br />
 <DrawingBoard bind:color={selectedColor} {mirror} bind:getImageData />
 <Controls bind:mirror {saveImage} />
-<p><a href="/gallery">Image examples</a></p>

@@ -238,16 +238,24 @@
 	};
 </script>
 
-<canvas
-	bind:this={canvas}
-	width={size * blockSize}
-	height={size * blockSize}
-	style={`width:${(size * blockSize) / PIXEL_RATIO}px; height:${
-		(size * blockSize) / PIXEL_RATIO
-	}px;`}
-	on:mousemove={onMouseMove}
-	on:mouseleave={onMouseLeave}
-	on:click={onClick}
-	data-ready={isReady}
-	data-testid="drawing-board"
-/>
+<div class="canvas-container">
+	<canvas
+		bind:this={canvas}
+		width={size * blockSize}
+		height={size * blockSize}
+		style={`width:${(size * blockSize) / PIXEL_RATIO}px; height:${
+			(size * blockSize) / PIXEL_RATIO
+		}px;`}
+		on:mousemove={onMouseMove}
+		on:mouseleave={onMouseLeave}
+		on:click={onClick}
+		data-ready={isReady}
+		data-testid="drawing-board"
+	/>
+</div>
+
+<style>
+	.canvas-container {
+		margin: 4rem 0;
+	}
+</style>
