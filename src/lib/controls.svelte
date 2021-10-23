@@ -24,11 +24,10 @@
 
 <style>
 	button {
-		background-color: white;
-		color: black;
+		background-color: #cf3a69;
+		border: none;
 	}
 	.active {
-		background-color: black;
-		color: white;
+		background-color: #606c76;
 	}
 </style>

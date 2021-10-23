@@ -28,9 +28,6 @@
 </script>
 
 <svelte:head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Pixel VG - WebGL Pixel Editor</title>
 	<meta
 		name="description"
@@ -40,7 +37,5 @@
 
 <h1>Pixel Editor</h1>
 <Palette {colors} bind:selectedColor on:addcolor={addColor} on:remcolor={removeColor} />
-<br />
 <DrawingBoard bind:color={selectedColor} {mirror} bind:getImageData />
 <Controls bind:mirror {saveImage} />
-<p><a href="/gallery">Image examples</a></p>

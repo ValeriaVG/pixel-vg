@@ -251,3 +251,9 @@
 	data-ready={isReady}
 	data-testid="drawing-board"
 />
+
+<style>
+	canvas {
+		margin: 4rem 0;
+	}
+</style>
