@@ -8,6 +8,7 @@
 	import pixelsToSVG from '$lib/pixelsToSVG';
 
 	let mirror = 0;
+	let gridEnabled = true;
 	let colors = ['#000000', '#ff0000'];
 	let selectedColor = colors[0];
 	let getImageData: ImageDataFn = () => '';
@@ -49,7 +50,7 @@
 
 <h1>Pixel Editor</h1>
 
-<Controls bind:mirror {saveImage}>
+<Controls bind:mirror bind:gridEnabled {saveImage}>
 	<Palette {colors} bind:selectedColor on:addcolor={addColor} on:remcolor={removeColor} />
-	<DrawingBoard bind:color={selectedColor} {mirror} bind:getImageData />
+	<DrawingBoard bind:color={selectedColor} {mirror} {gridEnabled} bind:getImageData />
 </Controls>

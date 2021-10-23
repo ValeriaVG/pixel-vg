@@ -12,6 +12,7 @@
 	export let pixels: ColoredPixels = [];
 	export let color: string = '#00ff00';
 	export let mirror: number = 0;
+	export let gridEnabled = true;
 
 	let isReady: boolean = false;
 
@@ -101,7 +102,7 @@
 		}
 
 		// GRID
-		{
+		if (gridEnabled) {
 			gl.useProgram(gridShaders);
 
 			const size = gl.getUniformLocation(gridShaders, 'size');
@@ -238,6 +239,13 @@
 		if (type === ImageDataType.url) return canvas.toDataURL();
 		return pixels;
 	};
+	let prevGrid = gridEnabled;
+	$: {
+		if (prevGrid !== gridEnabled) {
+			render();
+			prevGrid = gridEnabled;
+		}
+	}
 </script>
 
 <canvas
