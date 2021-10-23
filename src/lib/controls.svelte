@@ -2,6 +2,7 @@
 	import { ImageType, MirrorMode } from './types';
 	export let mirror: MirrorMode = MirrorMode.None;
 	export let saveImage = (_type: ImageType) => {};
+	export let gridEnabled = true;
 
 	const toggleMirror = (mode: MirrorMode) => () => {
 		if (mirror & mode) {
@@ -10,9 +11,11 @@
 			mirror |= mode;
 		}
 	};
+
+	const toggleGrid = () => (gridEnabled = !gridEnabled);
 </script>
 
-<nav>
+<nav class="toggles">
 	{#each ['X', 'Y'] as axis}
 		<button
 			title={`Toggle mirror on ${axis}-axis`}
@@ -22,6 +25,13 @@
 			<span>{axis}|{axis}</span>
 		</button>
 	{/each}
+	<button
+		title={`Toggle Grid`}
+		on:click={toggleGrid}
+		class={gridEnabled ? 'toggle active' : 'toggle'}
+	>
+		<span>GRID</span>
+	</button>
 </nav>
 <slot />
 <nav>
@@ -37,6 +47,9 @@
 		align-items: center;
 		margin: 0 auto;
 		grid-template-columns: repeat(2, 1fr);
+	}
+	nav.toggles {
+		grid-template-columns: repeat(3, 1fr);
 	}
 	button {
 		background-color: #cf3a69;
