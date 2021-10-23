@@ -10,9 +10,6 @@
 </script>
 
 <svelte:head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Pixel VG - Image Gallery</title>
 	<meta name="description" content="Image gallery with example images." />
 </svelte:head>
