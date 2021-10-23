@@ -33,7 +33,7 @@ describe('Drawing', () => {
 		cy.window().then(function (p) {
 			//stubbing prompt window
 			cy.stub(p, 'prompt').returns('new-image');
-			cy.contains('Save image').click();
+			cy.contains('Save as PNG').click();
 
 			const downloadsFolder = Cypress.config('downloadsFolder');
 			const downloadedFilename = path.join(downloadsFolder, 'new-image.png');

@@ -6,7 +6,7 @@ import images from '../routes/gallery/images';
 describe('Gallery', () => {
 	test('all images are rendered', async () => {
 		expect(images?.length).toBeGreaterThan(0);
-		const { getByAltText, getByText } = render(Gallery, {});
+		const { getByAltText } = render(Gallery, {});
 		for (const image of images) {
 			const img = getByAltText(image.title) as HTMLImageElement;
 			expect(img).toBeInTheDocument();
