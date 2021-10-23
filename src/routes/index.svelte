@@ -3,17 +3,29 @@
 	import DrawingBoard from '$lib/drawing-board.svelte';
 	import { downloadURI } from '$lib/files';
 	import Palette from '$lib/palette.svelte';
+	import { ColoredPixels, ImageDataType, ImageType } from '$lib/types';
+	import type { ImageDataFn } from '$lib/types';
+	import pixelsToSVG from '$lib/pixelsToSVG';
 
 	let mirror = 0;
 	let colors = ['#000000', '#ff0000'];
 	let selectedColor = colors[0];
-	let getImageData = () => '';
+	let getImageData: ImageDataFn = () => '';
 
-	const saveImage = () => {
-		const data = getImageData();
+	const saveImage = (type: ImageType) => {
 		let filename = prompt('How should we call the file?', 'image');
-		if (!filename.endsWith('.png')) filename += '.png';
-		downloadURI(data, filename);
+		if (!filename.endsWith('.' + type)) filename += '.' + type;
+		switch (type) {
+			case ImageType.png:
+				return downloadURI(getImageData(ImageDataType.url) as string, filename);
+			case ImageType.svg:
+				return downloadURI(
+					pixelsToSVG(getImageData(ImageDataType.pixels) as ColoredPixels),
+					filename
+				);
+			default:
+				throw Error(`Image type ${type} is not implemented`);
+		}
 	};
 
 	const addColor = (e: { detail: { color: string } }) => {

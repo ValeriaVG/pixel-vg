@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { MirrorMode } from './types';
+	import { ColoredPixels, ImageDataFn, ImageDataType, MirrorMode } from './types';
 	import { compileProgram } from './webgl';
 
 	const PIXEL_RATIO = window.devicePixelRatio;
@@ -9,7 +9,7 @@
 	export let blockSize = 32;
 	export let size: number = 16;
 	// [x,y,color]
-	export let pixels: Array<[number, number, string]> = [];
+	export let pixels: ColoredPixels = [];
 	export let color: string = '#00ff00';
 	export let mirror: number = 0;
 
@@ -232,9 +232,9 @@
 		render();
 	};
 
-	$: canvasRect = canvas?.getBoundingClientRect();
-	export const getImageData = () => {
-		return canvas.toDataURL();
+	export const getImageData: ImageDataFn = (type) => {
+		if (type === ImageDataType.url) return canvas.toDataURL();
+		return pixels;
 	};
 </script>
 

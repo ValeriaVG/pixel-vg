@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { MirrorMode } from './types';
+	import { ImageType, MirrorMode } from './types';
 	export let mirror: MirrorMode = MirrorMode.None;
-	export let saveImage = () => {};
+	export let saveImage = (_type: ImageType) => {};
 
 	const toggleMirror = (mode: MirrorMode) => () => {
 		if (mirror & mode) {
@@ -19,7 +19,8 @@
 	<button on:click={toggleMirror(MirrorMode.Y)} class={mirror & MirrorMode.Y ? 'active' : ''}
 		>y|y</button
 	>
-	<button on:click={saveImage}>Save image</button>
+	<button on:click={() => saveImage(ImageType.png)}>Save as PNG</button>
+	<button on:click={() => saveImage(ImageType.svg)}>Save as SVG</button>
 </nav>
 
 <style>
