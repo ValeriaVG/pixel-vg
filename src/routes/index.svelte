@@ -48,6 +48,8 @@
 </svelte:head>
 
 <h1>Pixel Editor</h1>
-<Palette {colors} bind:selectedColor on:addcolor={addColor} on:remcolor={removeColor} />
-<DrawingBoard bind:color={selectedColor} {mirror} bind:getImageData />
-<Controls bind:mirror {saveImage} />
+
+<Controls bind:mirror {saveImage}>
+	<Palette {colors} bind:selectedColor on:addcolor={addColor} on:remcolor={removeColor} />
+	<DrawingBoard bind:color={selectedColor} {mirror} bind:getImageData />
+</Controls>
