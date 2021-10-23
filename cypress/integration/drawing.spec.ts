@@ -12,7 +12,10 @@ describe('Drawing', () => {
 					// Click in the center of canvas
 					cy.get('canvas').click(size * i + size / 2, size * i + size / 2);
 				}
-				cy.get('canvas').matchImageSnapshot('line-drawing');
+				cy.get('canvas').scrollIntoView();
+				cy.get('canvas').matchImageSnapshot('line-drawing', {
+					snapshotSizes: [[512, 512]]
+				});
 			});
 	});
 	it('can save figure as png', () => {
@@ -26,9 +29,6 @@ describe('Drawing', () => {
 					// Click in the center of canvas
 					cy.get('canvas').click(size * i + size / 2, size * i + size / 2);
 				}
-				cy.get('canvas').matchImageSnapshot('line-drawing', {
-					snapshotSizes: [[512, 512]]
-				});
 			});
 		cy.window().then(function (p) {
 			//stubbing prompt window
@@ -37,9 +37,8 @@ describe('Drawing', () => {
 
 			const downloadsFolder = Cypress.config('downloadsFolder');
 			const downloadedFilename = path.join(downloadsFolder, 'new-image.png');
-
 			cy.readFile(downloadedFilename, 'binary').should((buffer) =>
-				expect(buffer.length).to.be.gt(100)
+				expect(buffer).to.have.length.greaterThan(0)
 			);
 		});
 	});
