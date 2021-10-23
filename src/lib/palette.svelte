@@ -66,6 +66,7 @@
 		transition: border-color ease 100ms;
 		padding: 0.5rem;
 		margin: 2px;
+		position: relative;
 	}
 	.button-icons {
 		color: #000;
@@ -97,10 +98,15 @@
 		background: rgba(0, 0, 0, 0.25);
 		border-radius: 0.5rem;
 		color: white;
-		width: 0.75rem;
-		height: 0.75rem;
-		display: block;
-		font-size: 0.75rem;
-		line-height: 0.75rem;
+		width: 1rem;
+		height: 1rem;
+		display: flex;
+		padding-left: 1px;
+		font-size: 1.25rem;
+		font-weight: normal;
+		line-height: 1rem;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
 	}
 </style>
