@@ -10,5 +10,11 @@ export default [
 		title: 'Squares Pattern',
 		tags: ['red', 'black', 'pattern'],
 		author: 'ValeriaVG'
+	},
+	{
+		image: 'ladybug.png',
+		title: 'Ladybug',
+		tags: ['red', 'black', 'cute'],
+		author: 'ValeriaVG'
 	}
 ];
