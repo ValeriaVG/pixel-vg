@@ -47,6 +47,6 @@
 	},
 	"type": "module",
 	"engines": {
-		"node": "16.9.1"
+		"node": "16.17.0"
 	}
 }
